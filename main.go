@@ -17,7 +17,7 @@ func main() {
 		{
 			Name:  "config",
 			Usage: "creates the empty config file",
-			// Action:  runConfig,
+			Action: cmd.ExecConfigCmd,
 		},
 		{
 			Name:  "open",
