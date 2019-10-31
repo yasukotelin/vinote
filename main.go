@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/urfave/cli"
+	"github.com/yasukotelin/vinote/cmd"
 )
 
 func main() {
@@ -38,7 +39,8 @@ func main() {
 			// Action:  runFinder,
 		},
 	}
-	// app.Action = runGonono
+
+	app.Action = cmd.ExecVinoteCmd
 
 	err := app.Run(os.Args)
 	if err != nil {
