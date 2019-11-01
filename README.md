@@ -2,6 +2,14 @@
 
 Quick access tool to a note directory with Vi, Vim, Neovim!
 
+> **NOTE** Only supported MacOS or Linux.
+
+## Installation
+
+```
+go get github.com/yasukotelin/vinote
+```
+
 ## What is the Note direcotry?
 
 If you want to write the note with your favorite editor, may be you have created the directory on local for markdown files.
@@ -53,5 +61,3 @@ You have to put the `.vinote.json` on the `~` (home directory) or run `vinote co
 | path     | your note directory path                  | ~/Dropbox/note  |
 | editor   | path to your vim (Gvim is not supported)  | vi, Vim, Neovim |
 | selector | vinote can find with your setted selector | fzf, peco       |
-
-> Windows path -> `"path": "C:\\Users\\yourname\\Dropbox\\note"`

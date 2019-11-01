@@ -8,6 +8,7 @@ import (
 	"os/exec"
 	"os/user"
 	"path/filepath"
+	"strings"
 
 	"github.com/urfave/cli"
 )
@@ -18,25 +19,29 @@ type Config struct {
 	Selector string `json:"selector"`
 }
 
+func (c *Config) getFullPath() (string, error) {
+	usr, err := user.Current()
+	if err != nil {
+		return "", err
+	}
+	newPath := strings.Replace(c.Path, "~", usr.HomeDir, 1)
+	return newPath, nil
+}
+
 // ExecConfigCmd opens config json file `.vinote.json` on the home direcotory.
 // If it still donesn't exist, this will create it.
 func ExecConfigCmd(c *cli.Context) error {
-	path, err := getVinoteJsonPath()
+	path, err := GetConfigPath()
 	if err != nil {
 		return err
 	}
 
 	editor := ""
 
-	if existsConfigFile(path) {
-		config, err := jsonDecode(path)
-		if err != nil {
-			return err
-		}
+	config, err := ReadConfig(path)
+	if err == nil {
 		editor = config.Editor
-	}
-
-	if editor == "" {
+	} else {
 		editor = askWhatUseEditor()
 	}
 
@@ -50,7 +55,7 @@ func ExecConfigCmd(c *cli.Context) error {
 	return nil
 }
 
-func getVinoteJsonPath() (string, error) {
+func GetConfigPath() (string, error) {
 	usr, err := user.Current()
 	if err != nil {
 		return "", err
@@ -58,12 +63,7 @@ func getVinoteJsonPath() (string, error) {
 	return filepath.Join(usr.HomeDir, ".vinote.json"), nil
 }
 
-func existsConfigFile(path string) bool {
-	_, err := os.Stat(path)
-	return err == nil
-}
-
-func jsonDecode(path string) (*Config, error) {
+func ReadConfig(path string) (*Config, error) {
 	bytes, err := ioutil.ReadFile(path)
 	if err != nil {
 		return nil, err
