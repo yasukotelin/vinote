@@ -22,7 +22,7 @@ func main() {
 		{
 			Name:  "open",
 			Usage: "opens the note directory with explorer(Finder)",
-			// Action:  runOpen,
+			Action:  cmd.ExecOpenCmd,
 		},
 		{
 			Name:    "new",
