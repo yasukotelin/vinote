@@ -35,8 +35,7 @@ func main() {
 			Name:    "select",
 			Usage:   "select a created note with selector command",
 			Aliases: []string{"s"},
-			// TODO 設定ファイルでセレクターを設定するような仕様にする
-			// Action:  runFinder,
+			Action:  cmd.ExecSelectCmd,
 		},
 	}
 
