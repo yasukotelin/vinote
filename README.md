@@ -1,6 +1,10 @@
 # vinote
 
-Quick access tool to a note directory with Vi, Vim, Neovim!
+[Japanese README page!](./README-jp.md)
+
+Quick access tool to a note directory with Vim and Neovim from anywhere!
+
+inspired by [mattn/memo](https://github.com/mattn/memo).
 
 > **NOTE** Only supported MacOS or Linux.
 
@@ -10,6 +14,34 @@ Quick access tool to a note directory with Vi, Vim, Neovim!
 go get github.com/yasukotelin/vinote
 ```
 
+## Setting
+
+You have to put the `.vinote.json` on the `~` (home directory) or run `vinote config`.
+
+```json
+{
+    "path": "~/Dropbox/note",
+    "editor": "nvim",
+    "selector": "fzf"
+}
+```
+
+| key      | value                                     | example        |
+|----------|-------------------------------------------|----------------|
+| path     | your note directory path                  | ~/Dropbox/note |
+| editor   | path to your vim (Gvim is not supported)  | Vim, Neovim    |
+| selector | vinote can find with your setted selector | fzf, peco      |
+
+## Commands
+
+| command       | value                                                      |
+|---------------|------------------------------------------------------------|
+| vinote        | open your note directory with vim or neovim from anywhere! |
+| vinote config | open a .vinote.json                                        |
+| vinote open   | open with Finder                                           |
+| vinote new    | create a new file from anywhere.                           |
+| vinote select | fuzzy find with your specified command
+
 ## What is the Note direcotry?
 
 If you want to write the note with your favorite editor, may be you have created the directory on local for markdown files.
@@ -18,7 +50,7 @@ This app is assuming that directory was created like the following.
 
 ```
 note
-├─food
+├─fo
 │  └─2018-12-12-in-tokyo
 │          index.md
 │          picture1.jpeg
@@ -44,20 +76,10 @@ note
             index.md
 ```
 
-## Setting
+## Author
 
-You have to put the `.vinote.json` on the `~` (home directory) or run `vinote config`.
+yasukotelin
 
-```json
-{
-    "path": "~/Dropbox/note",
-    "editor": "nvim",
-    "selector": "fzf"
-}
-```
+## LICENSE
 
-| key      | value                                     | example         |
-|----------|-------------------------------------------|-----------------|
-| path     | your note directory path                  | ~/Dropbox/note  |
-| editor   | path to your vim (Gvim is not supported)  | vi, Vim, Neovim |
-| selector | vinote can find with your setted selector | fzf, peco       |
+MIT
