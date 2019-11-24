@@ -8,17 +8,12 @@ import (
 )
 
 func ExecOpenCmd(c *cli.Context) error {
-	path, err := GetConfigPath()
+	config, err := ReadConfig()
 	if err != nil {
 		return err
 	}
 
-	config, err := ReadConfig(path)
-	if err != nil {
-		return err
-	}
-
-	path, err = config.getFullPath()
+	path, err := config.GetFullPath()
 	if err != nil {
 		return err
 	}

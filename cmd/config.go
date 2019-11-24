@@ -19,7 +19,7 @@ type Config struct {
 	Selector string `json:"selector"`
 }
 
-func (c *Config) getFullPath() (string, error) {
+func (c *Config) GetFullPath() (string, error) {
 	usr, err := user.Current()
 	if err != nil {
 		return "", err
@@ -31,14 +31,14 @@ func (c *Config) getFullPath() (string, error) {
 // ExecConfigCmd opens config json file `.vinote.json` on the home direcotory.
 // If it still donesn't exist, this will create it.
 func ExecConfigCmd(c *cli.Context) error {
-	path, err := GetConfigPath()
+	path, err := getConfigPath()
 	if err != nil {
 		return err
 	}
 
 	editor := ""
 
-	config, err := ReadConfig(path)
+	config, err := readConfig(path)
 	if err == nil {
 		editor = config.Editor
 	} else {
@@ -55,7 +55,7 @@ func ExecConfigCmd(c *cli.Context) error {
 	return nil
 }
 
-func GetConfigPath() (string, error) {
+func getConfigPath() (string, error) {
 	usr, err := user.Current()
 	if err != nil {
 		return "", err
@@ -63,7 +63,7 @@ func GetConfigPath() (string, error) {
 	return filepath.Join(usr.HomeDir, ".vinote.json"), nil
 }
 
-func ReadConfig(path string) (*Config, error) {
+func readConfig(path string) (*Config, error) {
 	bytes, err := ioutil.ReadFile(path)
 	if err != nil {
 		return nil, err
@@ -73,6 +73,19 @@ func ReadConfig(path string) (*Config, error) {
 		return nil, err
 	}
 	return &config, nil
+}
+
+func ReadConfig() (*Config, error) {
+	path, err := getConfigPath()
+	if err != nil {
+		return nil, err
+	}
+
+	config, err := readConfig(path)
+	if err != nil {
+		return nil, err
+	}
+	return config, nil
 }
 
 func askWhatUseEditor() string {

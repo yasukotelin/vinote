@@ -15,21 +15,20 @@ func main() {
 	app.Usage = "Quick access tool to a note directory with Vi, Vim, Neovim!"
 	app.Commands = []cli.Command{
 		{
-			Name:  "config",
-			Usage: "creates the empty config file",
+			Name:   "config",
+			Usage:  "creates the empty config file",
 			Action: cmd.ExecConfigCmd,
 		},
 		{
-			Name:  "open",
-			Usage: "opens the note directory with explorer(Finder)",
-			Action:  cmd.ExecOpenCmd,
+			Name:   "open",
+			Usage:  "opens the note directory with explorer(Finder)",
+			Action: cmd.ExecOpenCmd,
 		},
 		{
 			Name:    "new",
 			Usage:   "creates the new note",
 			Aliases: []string{"n"},
-			// TODO newの挙動を再考
-			// Action: runNew,
+			Action:  cmd.ExecNewCmd,
 		},
 		{
 			Name:    "select",
